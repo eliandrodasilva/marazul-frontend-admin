@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Bus, RefreshCw, Users } from "lucide-react";
+import { PageHeader } from "../components/admin";
 import MetricCard from "../components/MetricCard";
 import { Button } from "../components/ui/button";
 import { useAuth } from "../context/AuthContext";
@@ -60,34 +61,33 @@ export default function Dashboard() {
   const firstName = profile?.nome?.trim().split(/\s+/)[0];
 
   return (
-    <div className="space-y-8">
-      <div className="space-y-1">
-        <h1 className="flex flex-wrap items-center gap-x-2 text-2xl font-bold text-[#062A45] sm:text-3xl">
-          {profileLoading ? (
-            <>
+    <div>
+      <PageHeader
+        title={
+          profileLoading ? (
+            <span className="inline-flex flex-wrap items-center gap-x-2">
               Olá,
               <span
                 role="status"
                 aria-label="Carregando nome do administrador"
-                className="inline-block h-7 w-40 animate-pulse rounded bg-slate-200"
+                className="inline-block h-8 w-44 animate-pulse rounded-md bg-muted"
               />
-            </>
+            </span>
           ) : (
             <span>{firstName ? `Olá, ${firstName}` : "Olá!"}</span>
-          )}
-        </h1>
-        <p className="text-slate-600">
-          Resumo da operação da Marazul em tempo real.
-        </p>
-      </div>
+          )
+        }
+        subtitle="Resumo da operação da Marazul em tempo real."
+      />
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <MetricCard
           title="Total de ônibus"
           value={metrics?.totalVehicles}
           icon={Bus}
           loading={loading}
           error={failed}
+          tone="primary"
         />
         <MetricCard
           title="Colaboradores ativos"
@@ -95,16 +95,19 @@ export default function Dashboard() {
           icon={Users}
           loading={loading}
           error={failed}
+          tone="success"
         />
       </div>
 
       {failed && (
-        <Button
-          onClick={handleRetry}
-          className="gap-2 bg-[#062A45] font-bold text-white hover:bg-[#0f172a]"
-        >
-          <RefreshCw className="size-4" /> Tentar novamente
-        </Button>
+        <div className="mt-6">
+          <Button
+            onClick={handleRetry}
+            className="cursor-pointer gap-2 rounded-lg bg-primary font-semibold text-primary-foreground hover:bg-primary/90"
+          >
+            <RefreshCw className="size-4" /> Tentar novamente
+          </Button>
+        </div>
       )}
     </div>
   );

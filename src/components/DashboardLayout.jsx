@@ -10,9 +10,9 @@ export default function DashboardLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#F9FAFB]">
+    <div className="flex min-h-screen bg-background text-foreground">
       {/* Sidebar fixa (desktop) */}
-      <aside className="fixed top-0 left-0 z-40 hidden h-screen w-64 md:block">
+      <aside className="sticky top-0 z-40 hidden h-screen w-64 shrink-0 flex-col md:flex">
         <Sidebar />
       </aside>
 
@@ -20,9 +20,7 @@ export default function DashboardLayout() {
       <div
         className={cn(
           "fixed inset-0 z-40 bg-black/50 transition-opacity md:hidden",
-          mobileOpen
-            ? "opacity-100"
-            : "pointer-events-none opacity-0",
+          mobileOpen ? "opacity-100" : "pointer-events-none opacity-0",
         )}
         onClick={() => setMobileOpen(false)}
       />
@@ -39,20 +37,18 @@ export default function DashboardLayout() {
           size="icon"
           onClick={() => setMobileOpen(false)}
           aria-label="Fechar menu"
-          className="absolute top-4 right-4 z-10 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+          className="absolute top-4 right-4 z-10 text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <X className="size-5" />
         </Button>
         <Sidebar onNavigate={() => setMobileOpen(false)} />
       </aside>
 
-      {/* Área de conteúdo (Workspace) - rola de forma independente */}
-      <div className="min-h-screen md:pl-64">
+      {/* Área de conteúdo (Workspace) */}
+      <div className="flex min-w-0 flex-1 flex-col">
         <TopHeader onOpenMenu={() => setMobileOpen(true)} />
-        <main>
-          <div className="mx-auto max-w-7xl p-6 lg:p-8">
-            <Outlet />
-          </div>
+        <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10">
+          <Outlet />
         </main>
       </div>
     </div>

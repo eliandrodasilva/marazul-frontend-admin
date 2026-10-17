@@ -12,7 +12,7 @@ export default function SubmitButton({
     <Button
       type="submit"
       disabled={isDisabled || isLoading}
-      className="w-full bg-[#062A45] hover:bg-[#0f172a] text-white h-12 font-bold flex items-center justify-center gap-2 mt-2 cursor-pointer rounded-md"
+      className="mt-2 flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
     >
       {isLoading ? (
         <>
@@ -20,7 +20,7 @@ export default function SubmitButton({
         </>
       ) : (
         <>
-          {children} {Icon && <Icon className="h-4 w-4 font-bold" />}
+          {children} {Icon && <Icon className="h-4 w-4" />}
         </>
       )}
     </Button>

@@ -64,15 +64,14 @@ export default function Pagination({
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between px-5 py-3 border-t border-slate-100 bg-slate-50/40 rounded-b-xl">
+    <div className="flex flex-col gap-3 border-t px-6 py-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
       {/* Informação de contagem */}
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-muted-foreground">
         Exibindo{" "}
-        <span className="font-semibold text-slate-700">
-          {startItem}-{endItem}
+        <span className="font-semibold text-foreground">
+          {startItem}–{endItem}
         </span>{" "}
-        de{" "}
-        <span className="font-semibold text-slate-700">{totalItems}</span>{" "}
+        de <span className="font-semibold text-foreground">{totalItems}</span>{" "}
         {totalItems === 1 ? itemName : itemNamePlural || `${itemName}s`}
       </p>
 
@@ -85,20 +84,20 @@ export default function Pagination({
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage === 1}
             title="Página anterior"
-            className="inline-flex h-8 items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 text-xs font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-600 cursor-pointer shadow-2xs"
+            className="inline-flex h-8 cursor-pointer items-center gap-1 rounded-lg border bg-card px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-card disabled:hover:text-muted-foreground"
           >
             <ChevronLeft className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Anterior</span>
           </button>
 
           {/* Números das páginas */}
-          <div className="flex items-center gap-1 mx-1">
+          <div className="mx-1 flex items-center gap-1">
             {pageNumbers.map((page, index) => {
               if (page === "...") {
                 return (
                   <span
                     key={`ellipsis-${index}`}
-                    className="flex h-8 w-8 items-center justify-center text-xs text-slate-400 select-none"
+                    className="flex h-8 w-8 select-none items-center justify-center text-xs text-muted-foreground"
                   >
                     ...
                   </span>
@@ -112,10 +111,10 @@ export default function Pagination({
                   key={page}
                   type="button"
                   onClick={() => onPageChange(page)}
-                  className={`flex h-8 min-w-[32px] items-center justify-center rounded-lg px-2 text-xs font-semibold transition-all cursor-pointer ${
+                  className={`flex h-8 min-w-[32px] cursor-pointer items-center justify-center rounded-lg px-2 text-xs font-semibold transition-all ${
                     isActive
-                      ? "bg-[#062A45] text-white shadow-xs"
-                      : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 shadow-2xs"
+                      ? "bg-primary text-primary-foreground shadow-xs"
+                      : "border bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
                   {page}
@@ -130,7 +129,7 @@ export default function Pagination({
             onClick={() => onPageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
             title="Próxima página"
-            className="inline-flex h-8 items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 text-xs font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-600 cursor-pointer shadow-2xs"
+            className="inline-flex h-8 cursor-pointer items-center gap-1 rounded-lg border bg-card px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-card disabled:hover:text-muted-foreground"
           >
             <span className="hidden sm:inline">Próximo</span>
             <ChevronRight className="h-3.5 w-3.5" />

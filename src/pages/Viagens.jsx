@@ -1,8 +1,19 @@
+import { Map } from "lucide-react";
+import { Empty, ListCard, PageHeader } from "../components/admin";
+
 export default function Viagens() {
   return (
-    <div className="space-y-2">
-      <h1 className="text-2xl font-bold text-[#062A45]">Viagens</h1>
-      <p className="text-slate-600">Gerenciamento das viagens.</p>
-    </div>
+    <>
+      <PageHeader title="Viagens" subtitle="Programação de viagens." />
+      <ListCard title="Viagens" count={0}>
+        <Empty
+          icon={Map}
+          title="Nenhuma viagem programada"
+          text="As viagens aparecerão aqui."
+          to="/frota"
+          cta="Ver frota"
+        />
+      </ListCard>
+    </>
   );
 }

@@ -9,9 +9,9 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
+import { AdminCard, PageHeader } from "../../components/admin";
 import GenericInput from "../../components/GenericInput";
 import { Button } from "../../components/ui/button";
-import { Card, CardContent, CardFooter } from "../../components/ui/card";
 import { Checkbox } from "../../components/ui/checkbox";
 import { Label } from "../../components/ui/label";
 import PerfilService from "../../services/PerfilService";
@@ -201,29 +201,28 @@ const CadastroPerfil = ({ isEdicao = false }) => {
   };
 
   return (
-    <div className="bg-slate-50/50 font-sans">
-      <div className="mb-3">
-        <h1 className="text-xl font-semibold text-slate-700">
-          {isEdicao ? "Editar Perfil" : "Cadastro do Perfil"}
-        </h1>
-      </div>
+    <div className="space-y-6">
+      <PageHeader
+        title={isEdicao ? "Editar perfil" : "Cadastro de perfil"}
+        subtitle="Defina o nome e as permissões de acesso do perfil."
+      />
 
-      <Card className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden py-1 gap-0">
-        <div className="flex border-b border-slate-100 px-6 py-3 items-center gap-3">
-          <ShieldCheck className="h-4 w-4 text-[#e31e24]" />
-          <h2 className="text-sm font-medium text-[#062A45]">
+      <AdminCard>
+        <div className="flex items-center gap-2.5 border-b border-border px-6 py-4">
+          <ShieldCheck className="h-4 w-4 text-accent" />
+          <h2 className="text-sm font-semibold text-foreground">
             Informações do perfil
           </h2>
         </div>
 
-        <CardContent className="px-6 py-4">
-          <form id="form-perfil" onSubmit={handleSubmit} className="space-y-3">
+        <div className="p-6">
+          <form id="form-perfil" onSubmit={handleSubmit} className="space-y-6">
             {isPerfilPadrao && (
               <div
-                className="flex items-start gap-3 rounded-md border border-slate-200 bg-[#F8FAFC] px-4 py-3 text-[13px] text-slate-500"
+                className="flex items-start gap-3 rounded-xl border border-border bg-muted/40 px-4 py-3 text-sm text-muted-foreground"
                 role="note"
               >
-                <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#062A45]" />
+                <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 <p>
                   Este é o perfil padrão do sistema. O nome e as permissões não
                   podem ser alterados.
@@ -234,7 +233,6 @@ const CadastroPerfil = ({ isEdicao = false }) => {
             <GenericInput
               id="nome-perfil"
               label="NOME DO PERFIL"
-              labelColor="#062A45"
               type="text"
               placeholder="Ex: Atendimento"
               required
@@ -243,22 +241,22 @@ const CadastroPerfil = ({ isEdicao = false }) => {
               disabled={camposBloqueados}
             />
 
-            <section aria-labelledby="permissoes-heading" className="space-y-3">
+            <section aria-labelledby="permissoes-heading" className="space-y-4">
               <div>
                 <h3
                   id="permissoes-heading"
-                  className="text-[11px] font-bold tracking-wider text-[#062A45]"
+                  className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                 >
-                  PERMISSÕES <span className="text-[#e31e24]">*</span>
+                  PERMISSÕES <span className="text-accent">*</span>
                 </h3>
-                <p className="mt-1 text-xs text-slate-500">
+                <p className="mt-1 text-xs text-muted-foreground">
                   Selecione ao menos uma permissão para este perfil.
                 </p>
               </div>
 
               {isEdicao && !isLoadingPerfil && !isPerfilPadrao && (
                 <div
-                  className="flex items-start gap-3 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-[13px] text-amber-700"
+                  className="flex items-start gap-3 rounded-xl border border-warning/30 bg-warning/10 px-4 py-3 text-sm text-warning"
                   role="note"
                 >
                   <Info className="mt-0.5 h-4 w-4 shrink-0" />
@@ -271,17 +269,17 @@ const CadastroPerfil = ({ isEdicao = false }) => {
 
               {!permissoesCarregadas || isLoadingPerfil ? (
                 <div
-                  className="flex min-h-24 items-center justify-center gap-2 rounded-md border border-slate-200 bg-[#F8FAFC] text-sm text-slate-500"
+                  className="flex min-h-24 items-center justify-center gap-2 rounded-xl border border-border bg-muted/30 text-sm text-muted-foreground"
                   role="status"
                 >
-                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <Loader2 className="h-4 w-4 animate-spin text-primary" />
                   {isLoadingPerfil
                     ? "Carregando dados do perfil..."
                     : "Carregando permissões..."}
                 </div>
               ) : erroPermissoes ? (
-                <div className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-md border border-red-200 bg-red-50 px-4 text-center">
-                  <p className="text-sm text-red-700">
+                <div className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-xl border border-destructive/20 bg-destructive/10 px-4 text-center">
+                  <p className="text-sm text-destructive">
                     Não foi possível carregar as permissões.
                   </p>
                   <Button
@@ -292,17 +290,17 @@ const CadastroPerfil = ({ isEdicao = false }) => {
                       setErroPermissoes(false);
                       setTentativaCarregamento((tentativa) => tentativa + 1);
                     }}
-                    className="h-8 cursor-pointer gap-2 rounded-md border-red-200 bg-white px-3 text-xs text-red-700 hover:bg-red-100"
+                    className="h-8 cursor-pointer gap-2 rounded-xl border-destructive/20 bg-card px-3 text-xs text-destructive hover:bg-destructive/10"
                   >
                     <RefreshCw className="h-3.5 w-3.5" /> Tentar novamente
                   </Button>
                 </div>
               ) : permissoes.length === 0 ? (
-                <p className="rounded-md border border-slate-200 bg-[#F8FAFC] p-4 text-sm text-slate-500">
+                <p className="rounded-xl border border-border bg-muted/30 p-4 text-sm text-muted-foreground">
                   Nenhuma permissão disponível.
                 </p>
               ) : (
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   {Object.entries(permissoesPorModulo).map(
                     ([modulo, permissoesDoModulo]) => {
                       const selecionadasNoModulo = permissoesDoModulo.filter(
@@ -314,16 +312,16 @@ const CadastroPerfil = ({ isEdicao = false }) => {
                       return (
                         <fieldset
                           key={modulo}
-                          className="rounded-md border border-slate-200 px-4 py-3"
+                          className="rounded-xl border border-border bg-background/50 p-4"
                         >
-                          <legend className="px-1 text-sm font-semibold text-[#062A45]">
+                          <legend className="px-1.5 text-sm font-semibold text-foreground">
                             {ROTULOS_MODULO[modulo] ?? modulo}
                           </legend>
                           <div className="grid grid-cols-1 gap-x-6 gap-y-3 pb-3 sm:grid-cols-2">
                             {permissoesDoModulo.map((permissao) => (
                               <div
                                 key={permissao.id}
-                                className="flex items-center gap-2"
+                                className="flex items-center gap-2.5"
                               >
                                 <Checkbox
                                   id={`permissao-${permissao.id}`}
@@ -334,11 +332,11 @@ const CadastroPerfil = ({ isEdicao = false }) => {
                                     togglePermissao(permissao.id)
                                   }
                                   disabled={camposBloqueados}
-                                  className="rounded-[4px] border-slate-300 bg-white cursor-pointer data-[state=checked]:border-[#062A45] data-[state=checked]:bg-[#062A45] data-[state=checked]:text-white"
+                                  className="rounded-[4px] border-input bg-card cursor-pointer data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
                                 />
                                 <Label
                                   htmlFor={`permissao-${permissao.id}`}
-                                  className="cursor-pointer text-sm font-normal text-slate-600"
+                                  className="cursor-pointer text-sm font-normal text-foreground"
                                 >
                                   {ROTULOS_FUNCIONALIDADE[
                                     permissao.funcionalidade
@@ -347,7 +345,7 @@ const CadastroPerfil = ({ isEdicao = false }) => {
                               </div>
                             ))}
                           </div>
-                          <div className="flex items-center gap-2 border-t border-slate-100 pt-3">
+                          <div className="flex items-center gap-2.5 border-t border-border pt-3">
                             <Checkbox
                               id={`modulo-${modulo}`}
                               checked={
@@ -364,11 +362,11 @@ const CadastroPerfil = ({ isEdicao = false }) => {
                                 )
                               }
                               disabled={camposBloqueados}
-                              className="rounded-[4px] border-slate-300 bg-white cursor-pointer data-[state=checked]:border-[#062A45] data-[state=checked]:bg-[#062A45] data-[state=checked]:text-white"
+                              className="rounded-[4px] border-input bg-card cursor-pointer data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
                             />
                             <Label
                               htmlFor={`modulo-${modulo}`}
-                              className="cursor-pointer text-sm font-medium text-slate-700"
+                              className="cursor-pointer text-xs font-medium text-muted-foreground"
                             >
                               Selecionar todas
                             </Label>
@@ -381,14 +379,14 @@ const CadastroPerfil = ({ isEdicao = false }) => {
               )}
             </section>
           </form>
-        </CardContent>
+        </div>
 
-        <CardFooter className="flex justify-between border-t border-slate-100 bg-slate-50/50 px-6 py-3">
+        <div className="flex items-center justify-between border-t border-border bg-muted/30 px-6 py-4">
           <Button
             type="button"
             variant="outline"
             onClick={() => navigate("/perfis")}
-            className="h-9 cursor-pointer gap-2 rounded-md border border-slate-200 bg-white px-5 text-xs font-semibold text-slate-600 shadow-sm transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-800"
+            className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl border border-border bg-card px-4 text-sm font-medium text-foreground hover:bg-muted"
           >
             <ArrowLeft className="h-4 w-4" /> Voltar
           </Button>
@@ -397,7 +395,7 @@ const CadastroPerfil = ({ isEdicao = false }) => {
               type="submit"
               form="form-perfil"
               disabled={!podeSalvar}
-              className="flex cursor-pointer items-center gap-2 rounded-md bg-[#0A1A2F] px-6 py-4 text-sm font-medium normal-case tracking-normal text-white transition-colors hover:bg-[#0A1A2F]/90 disabled:pointer-events-auto disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500 disabled:opacity-100 disabled:hover:bg-slate-300"
+              className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-primary px-5 text-sm font-medium text-primary-foreground shadow-sm transition hover:opacity-90 disabled:pointer-events-auto disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground disabled:opacity-100"
             >
               {isSaving ? (
                 <>
@@ -411,10 +409,11 @@ const CadastroPerfil = ({ isEdicao = false }) => {
               )}
             </Button>
           )}
-        </CardFooter>
-      </Card>
+        </div>
+      </AdminCard>
     </div>
   );
 };
 
 export default CadastroPerfil;
+

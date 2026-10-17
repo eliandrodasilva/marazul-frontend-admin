@@ -10,7 +10,7 @@ import {
 export default function GenericSelect({
   id,
   label,
-  labelColor = "#062A45",
+  labelColor,
   icon: Icon,
   required = false,
   disabled = false,
@@ -22,21 +22,21 @@ export default function GenericSelect({
   errorMessage = "",
 }) {
   return (
-    <div className="space-y-2">
+    <div className="flex flex-col gap-1.5">
       <Label
         htmlFor={id}
-        className="text-[11px] font-bold tracking-wider"
-        style={{ color: labelColor }}
+        style={labelColor ? { color: labelColor } : undefined}
+        className="text-sm font-medium text-foreground"
       >
         {label}
-        {required && <span className="text-[#e31e24] ml-1">*</span>}
+        {required && <span className="text-accent"> *</span>}
       </Label>
 
       <div className="relative">
         {Icon && (
           <Icon
-            className={`absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 z-10 pointer-events-none ${
-              hasError ? "text-red-400" : "text-slate-400"
+            className={`pointer-events-none absolute left-3.5 top-1/2 z-10 h-4 w-4 -translate-y-1/2 ${
+              hasError ? "text-destructive" : "text-muted-foreground"
             }`}
           />
         )}
@@ -49,17 +49,17 @@ export default function GenericSelect({
         >
           <SelectTrigger
             id={id}
-            className={`w-full bg-[#F8FAFC] h-11 text-sm transition-colors border rounded-md ${
-              Icon ? "pl-9" : "pl-3"
+            className={`h-10 w-full rounded-lg border bg-card py-2.5 pr-3.5 text-sm text-foreground shadow-none outline-none transition focus:border-ring focus:ring-3 focus:ring-ring/15 ${
+              Icon ? "pl-10" : "pl-3.5"
             } ${
               hasError
-                ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                : "border-slate-200 focus:ring-slate-300 focus:border-slate-400"
+                ? "border-destructive focus:border-destructive focus:ring-destructive/15"
+                : "border-input"
             }`}
           >
             <SelectValue placeholder={placeholder} />
           </SelectTrigger>
-          <SelectContent className="rounded-md border-slate-200 bg-white shadow-lg">
+          <SelectContent className="rounded-lg border bg-popover text-popover-foreground shadow-lg">
             {options.map((option) => (
               <SelectItem key={option.value} value={option.value}>
                 {option.label}
@@ -70,7 +70,9 @@ export default function GenericSelect({
       </div>
 
       {hasError && errorMessage && (
-        <p className="text-xs font-medium text-red-500 mt-1">{errorMessage}</p>
+        <p className="mt-0.5 text-xs font-medium text-destructive">
+          {errorMessage}
+        </p>
       )}
     </div>
   );

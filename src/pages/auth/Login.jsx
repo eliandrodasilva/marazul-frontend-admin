@@ -59,10 +59,10 @@ export default function Login() {
       </CardHeader>
 
       <CardContent>
-        <form onSubmit={handleLogin} className="space-y-6">
+        <form onSubmit={handleLogin} className="space-y-5 text-left">
           <GenericInput
             id="email"
-            label="EMAIL"
+            label="E-mail"
             type="email"
             icon={Mail}
             placeholder="nome@marazul.com.br"
@@ -77,11 +77,11 @@ export default function Login() {
           <div className="flex items-center space-x-2 pt-1">
             <Checkbox
               id="keep-connected"
-              className="border-slate-300 data-[state=checked]:bg-[#062A45] cursor-pointer"
+              className="cursor-pointer border-input data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
             />
             <Label
               htmlFor="keep-connected"
-              className="text-sm text-slate-600 font-normal cursor-pointer leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              className="cursor-pointer text-sm font-normal leading-none text-muted-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               Manter conectado
             </Label>
@@ -97,12 +97,12 @@ export default function Login() {
         </form>
       </CardContent>
       <CardFooter className="flex justify-center">
-        <div className="w-full border-t border-slate-100 pt-2 flex justify-center">
-          <p className="text-sm text-slate-600">
+        <div className="flex w-full justify-center border-t pt-4">
+          <p className="text-sm text-muted-foreground">
             Esqueceu a senha?{" "}
             <Link
               to="/recuperar-senha"
-              className="text-[#e31e24] hover:underline font-medium"
+              className="font-medium text-accent hover:underline"
             >
               Clique Aqui
             </Link>

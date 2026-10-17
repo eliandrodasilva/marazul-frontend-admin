@@ -15,7 +15,8 @@ export default function Rightbar({ onNavigate }) {
   if (!isAdmin()) return null;
 
   return (
-    <div className="space-y-1 border-t border-slate-100 pt-4">
+    <>
+      <div className="my-4 border-t border-sidebar-border" />
       {adminItems.map(({ to, label, icon: Icon }) => (
         <NavLink
           key={to}
@@ -23,17 +24,17 @@ export default function Rightbar({ onNavigate }) {
           onClick={onNavigate}
           className={({ isActive }) =>
             cn(
-              "flex items-center gap-3 rounded-md px-4 py-2.5 text-sm font-medium transition-colors",
+              "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
               isActive
-                ? "bg-[#e31e24]/10 text-[#e31e24] font-semibold"
-                : "text-slate-500 hover:bg-slate-50 hover:text-[#062A45]",
+                ? "bg-sidebar-accent text-sidebar-foreground font-semibold [&_svg]:text-accent"
+                : "text-sidebar-muted hover:bg-sidebar-accent hover:text-sidebar-foreground",
             )
           }
         >
-          <Icon className="size-5 shrink-0" />
+          <Icon className="h-4.5 w-4.5 shrink-0" />
           <span>{label}</span>
         </NavLink>
       ))}
-    </div>
+    </>
   );
 }

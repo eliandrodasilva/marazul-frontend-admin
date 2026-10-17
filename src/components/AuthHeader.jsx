@@ -4,18 +4,18 @@ import { CardTitle, CardDescription } from "./ui/card";
 export default function AuthHeader() {
   return (
     <>
-      <div className="flex flex-col items-center transform">
+      <div className="flex flex-col items-center">
         <img
           src={logoMarazul}
           alt="Logo da Marazul"
-          className="h-32 object-contain"
+          className="h-28 object-contain"
         />
       </div>
-      <div className="text-center space-y-1 -mt-4">
-        <CardTitle className="text-2xl font-bold text-[#062A45] tracking-tight">
+      <div className="-mt-2 space-y-1 text-center">
+        <CardTitle className="font-display text-2xl font-bold tracking-tight text-foreground">
           Marazul
         </CardTitle>
-        <CardDescription className="text-sm text-slate-500 font-medium">
+        <CardDescription className="text-sm font-medium text-muted-foreground">
           Painel Administrativo
         </CardDescription>
       </div>

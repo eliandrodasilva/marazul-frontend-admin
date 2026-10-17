@@ -1,8 +1,19 @@
+import { BarChart3 } from "lucide-react";
+import { Empty, ListCard, PageHeader } from "../components/admin";
+
 export default function Relatorios() {
   return (
-    <div className="space-y-2">
-      <h1 className="text-2xl font-bold text-[#062A45]">Relatórios</h1>
-      <p className="text-slate-600">Relatórios e indicadores.</p>
-    </div>
+    <>
+      <PageHeader title="Relatórios" subtitle="Indicadores da operação." />
+      <ListCard title="Relatórios" count={0}>
+        <Empty
+          icon={BarChart3}
+          title="Nenhum relatório disponível"
+          text="Os relatórios aparecerão aqui."
+          to="/dashboard"
+          cta="Voltar ao dashboard"
+        />
+      </ListCard>
+    </>
   );
 }

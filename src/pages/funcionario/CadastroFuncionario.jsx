@@ -2,6 +2,7 @@ import {
   ArrowLeft,
   Calendar1,
   CreditCard,
+  KeyRound,
   Loader2,
   Mail,
   Phone,
@@ -12,10 +13,9 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
+import { AdminCard, PageHeader, Section } from "../../components/admin";
 import GenericInput from "../../components/GenericInput";
 import GenericSelect from "../../components/GenericSelect";
-import { Button } from "../../components/ui/button";
-import { Card, CardContent, CardFooter } from "../../components/ui/card";
 import { Checkbox } from "../../components/ui/checkbox";
 import { Label } from "../../components/ui/label";
 import FuncionarioService from "../../services/FuncionarioService";
@@ -171,166 +171,122 @@ const CadastroFuncionario = ({ isEdicao = false }) => {
 
   if (isFetching) {
     return (
-      <div className="flex min-h-[calc(100svh-8rem)] flex-col items-center justify-center font-sans text-slate-500 gap-3">
-        <Loader2 className="size-8 animate-spin text-[#062A45]" />
-        <p>Carregando dados do colaborador...</p>
+      <div className="flex min-h-[calc(100svh-8rem)] flex-col items-center justify-center gap-3 text-muted-foreground">
+        <Loader2 className="size-8 animate-spin text-primary" />
+        <p className="text-sm font-medium text-foreground">
+          Carregando dados do colaborador...
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="bg-slate-50/50 font-sans">
-      <div className="mb-3">
-        <div className="flex items-start gap-2 flex-col-reverse">
-          <div>
-            <h1 className="text-xl font-semibold text-slate-700">
-              {isEdicao ? "Edição" : "Cadastro"} do Colaborador
-            </h1>
-          </div>
-        </div>
-      </div>
-      <Card className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden py-1 gap-0">
-        <div className="flex border-b border-slate-100 px-6 py-3 items-center gap-3">
-          <User className="h-4 w-4 text-[#e31e24]" />
-          <h2 className="text-sm font-medium text-[#062A45]">
-            Informações do colaborador
-          </h2>
-        </div>
+    <div>
+      <PageHeader
+        title={isEdicao ? "Edição de colaborador" : "Cadastro de colaborador"}
+        subtitle="Adicione uma pessoa à equipe."
+      />
 
-        <CardContent className="px-6 py-4">
-          <form
-            className="space-y-3"
-            onSubmit={handleSubmit}
-            id="form-funcionario"
-          >
-            <div>
-              <GenericInput
-                id="nome"
-                placeholder="Nome do colaborador"
-                label="Nome"
-                labelColor="#062A45"
-                icon={User}
-                type="text"
-                required
-                onChange={(e) => setNome(e.target.value)}
-                value={nome}
-              />
-            </div>
-            <div className="grid grid-cols-1 gap-x-6 gap-y-3 md:grid-cols-2">
-              <div>
+      <AdminCard>
+        <form onSubmit={handleSubmit} id="form-funcionario">
+          <div className="divide-y">
+            <Section icon={User} title="Dados pessoais">
+              <div className="sm:col-span-2">
                 <GenericInput
-                  id="admissao"
-                  type="date"
-                  max={dataAtual}
-                  label="Admissão"
-                  labelColor="#062A45"
-                  icon={Calendar1}
-                  onChange={(e) => setAdmissao(e.target.value)}
-                  value={admissao}
-                />
-              </div>
-              <div>
-                <GenericInput
-                  label="Telefone"
-                  id="telefone"
+                  id="nome"
+                  placeholder="Nome do colaborador"
+                  label="Nome"
+                  icon={User}
                   type="text"
-                  inputMode="numeric"
-                  autoComplete="tel"
-                  maxLength={15}
-                  icon={Phone}
-                  placeholder="(44) 99999-9999"
-                  labelColor="#062A45"
-                  onChange={handleTelefoneChange}
-                  value={telefone}
-                  hasError={telefoneTemErro}
-                  errorMessage="Informe um celular válido no formato (XX) 9XXXX-XXXX"
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 gap-x-6 gap-y-3 md:grid-cols-2">
-              <div>
-                <GenericSelect
-                  id="funcao"
-                  label="Função"
-                  labelColor="#062A45"
                   required
-                  value={funcao}
-                  placeholder="Selecione uma função"
-                  onChange={setFuncao}
-                  options={funcoes}
+                  onChange={(e) => setNome(e.target.value)}
+                  value={nome}
                 />
               </div>
-              <div>
-                <GenericSelect
-                  id="perfil"
-                  label="Perfil de Acesso"
-                  labelColor="#062A45"
-                  icon={ShieldCheck}
-                  required
-                  value={perfilId}
-                  placeholder={
-                    perfis.length > 0
-                      ? "Selecione um perfil"
-                      : "Nenhum perfil disponível"
-                  }
-                  onChange={setPerfilId}
-                  options={perfis}
-                />
-              </div>
-            </div>
-            {funcao === "DRIVER" && (
-              <div className="grid grid-cols-1 gap-x-6 gap-y-3 md:grid-cols-2">
-                <div>
+
+              <GenericInput
+                id="admissao"
+                type="date"
+                max={dataAtual}
+                label="Admissão"
+                icon={Calendar1}
+                onChange={(e) => setAdmissao(e.target.value)}
+                value={admissao}
+              />
+
+              <GenericInput
+                label="Telefone"
+                id="telefone"
+                type="text"
+                inputMode="numeric"
+                autoComplete="tel"
+                maxLength={15}
+                icon={Phone}
+                placeholder="(44) 99999-9999"
+                onChange={handleTelefoneChange}
+                value={telefone}
+                hasError={telefoneTemErro}
+                errorMessage="Informe um celular válido no formato (XX) 9XXXX-XXXX"
+              />
+
+              <GenericSelect
+                id="funcao"
+                label="Função"
+                required
+                value={funcao}
+                placeholder="Selecione uma função"
+                onChange={setFuncao}
+                options={funcoes}
+              />
+
+              {funcao === "DRIVER" && (
+                <>
                   <GenericInput
                     id="cnh"
                     label="CNH"
                     type="text"
                     icon={CreditCard}
                     placeholder="Número da Habilitação"
-                    labelColor="#062A45"
                     value={cnh}
                     onChange={(e) => setCnh(e.target.value)}
                     required
                   />
-                </div>
-                <div>
                   <GenericSelect
                     id="categoriaCNH"
                     label="Categoria"
-                    labelColor="#062A45"
                     placeholder="Tipo"
                     options={categoriasCnh}
                     value={categoria}
                     onChange={setCategoria}
                     required
                   />
-                </div>
-              </div>
-            )}
-            <div className="flex items-start gap-3 rounded-md border border-slate-200 bg-[#F8FAFC] px-4 py-3">
-              <Checkbox
-                id="isUser"
-                checked={isUser}
-                onCheckedChange={(checked) => setIsUser(checked === true)}
-                className="mt-0.5 rounded-[4px] border-slate-300 bg-white cursor-pointer data-[state=checked]:border-[#062A45] data-[state=checked]:bg-[#062A45] data-[state=checked]:text-white"
+                </>
+              )}
+            </Section>
+
+            <Section
+              icon={KeyRound}
+              title="Acesso ao sistema"
+              desc="Defina se o colaborador poderá fazer login."
+            >
+              <GenericSelect
+                id="perfil"
+                label="Perfil de acesso"
+                icon={ShieldCheck}
+                required
+                value={perfilId}
+                placeholder={
+                  perfis.length > 0
+                    ? "Selecione um perfil"
+                    : "Nenhum perfil disponível"
+                }
+                onChange={setPerfilId}
+                options={perfis}
               />
-              <div className="space-y-1">
-                <Label
-                  htmlFor="isUser"
-                  className="cursor-pointer text-sm font-medium normal-case tracking-normal text-[#062A45]"
-                >
-                  Permitir acesso ao sistema?
-                </Label>
-                <p className="text-[13px] text-slate-500">
-                  Marque para que o colaborador possa fazer login no sistema.
-                </p>
-              </div>
-            </div>
-            <div>
+
               <GenericInput
                 id="email"
                 label="E-mail"
-                labelColor="#062A45"
                 type="email"
                 icon={Mail}
                 placeholder="usuario@marazul.com.br"
@@ -341,37 +297,58 @@ const CadastroFuncionario = ({ isEdicao = false }) => {
                 hasError={emailTemErro}
                 errorMessage="Informe um e-mail válido"
               />
-            </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex justify-between border-t border-slate-100 bg-slate-50/50 px-6 py-3">
-          <Button
-            variant="outline"
-            onClick={() => navigate("/funcionario")}
-            className="h-9 gap-2 rounded-md border border-slate-200 bg-white px-5 text-xs font-semibold text-slate-600 shadow-sm transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-800 cursor-pointer"
-          >
-            <ArrowLeft className="h-4 w-4" /> Voltar
-          </Button>
-          <Button
-            className="flex items-center gap-2 rounded-md bg-[#0A1A2F] px-6 py-4 text-sm font-medium normal-case tracking-normal text-white transition-colors hover:bg-[#0A1A2F]/90 disabled:pointer-events-auto disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500 disabled:opacity-100 disabled:hover:bg-slate-300 cursor-pointer"
-            type="submit"
-            form="form-funcionario"
-            disabled={!isFormValid || isLoading}
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="mr-2 size-4 animate-spin" />
-                Salvando...
-              </>
-            ) : (
-              <>
-                <Save className="mr-2 size-4" />
-                {isEdicao ? "Salvar Alterações" : "Salvar Colaborador"}
-              </>
-            )}
-          </Button>
-        </CardFooter>
-      </Card>
+
+              <div className="flex items-start gap-3 rounded-lg border bg-muted/40 p-4 sm:col-span-2">
+                <Checkbox
+                  id="isUser"
+                  checked={isUser}
+                  onCheckedChange={(checked) => setIsUser(checked === true)}
+                  className="mt-0.5 cursor-pointer rounded-[4px] border-input bg-card data-[state=checked]:border-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
+                />
+                <div className="space-y-0.5">
+                  <Label
+                    htmlFor="isUser"
+                    className="cursor-pointer text-sm font-medium normal-case tracking-normal text-foreground"
+                  >
+                    Permitir acesso ao sistema?
+                  </Label>
+                  <p className="text-xs text-muted-foreground">
+                    Marque para que o colaborador possa fazer login no sistema.
+                  </p>
+                </div>
+              </div>
+            </Section>
+          </div>
+
+          <div className="flex items-center justify-between gap-3 rounded-b-2xl border-t bg-muted/40 px-6 py-4">
+            <button
+              type="button"
+              onClick={() => navigate("/funcionario")}
+              className="inline-flex cursor-pointer items-center gap-2 rounded-lg border bg-card px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+            >
+              <ArrowLeft className="h-4 w-4" /> Voltar
+            </button>
+            <button
+              type="submit"
+              form="form-funcionario"
+              disabled={!isFormValid || isLoading}
+              className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Salvando...
+                </>
+              ) : (
+                <>
+                  <Save className="h-4 w-4" />
+                  {isEdicao ? "Salvar Alterações" : "Salvar colaborador"}
+                </>
+              )}
+            </button>
+          </div>
+        </form>
+      </AdminCard>
     </div>
   );
 };

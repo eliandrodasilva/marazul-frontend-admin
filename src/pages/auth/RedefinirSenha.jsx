@@ -53,14 +53,14 @@ export default function RedefinirSenha() {
     return (
       <AuthLayout>
         <div className="flex justify-center">
-          <div className="bg-[#ffefef] p-4 rounded-xl relative mt-1">
-            <AlertCircle className="h-10 w-10 text-[#e31e24]" />
+          <div className="relative mt-1 rounded-2xl bg-destructive/10 p-4 text-destructive">
+            <AlertCircle className="h-10 w-10" />
           </div>
         </div>
-        <h2 className="text-xl font-bold text-[#062A45] -mb-1">
+        <h2 className="-mb-1 font-display text-xl font-bold text-foreground">
           Link Inválido
         </h2>
-        <p className="text-slate-600 text-sm leading-relaxed px-4">
+        <p className="px-4 text-sm leading-relaxed text-muted-foreground">
           Não foi possível identificar o token de segurança. Por favor, solicite
           um novo link de redefinição de senha para continuar
         </p>
@@ -70,12 +70,12 @@ export default function RedefinirSenha() {
         </Link>
 
         <CardFooter className="flex justify-center pt-2">
-          <div className="w-full border-t border-slate-100 pt-6 flex justify-center">
+          <div className="flex w-full justify-center border-t pt-6">
             <Link
               to="/login"
-              className="inline-flex items-center text-sm text-[#e31e24] hover:text-[#c1191f] hover:underline font-medium transition-colors"
+              className="inline-flex items-center text-sm font-medium text-accent transition-colors hover:underline"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" /> Voltar para o login
+              <ArrowLeft className="mr-2 h-4 w-4" /> Voltar para o login
             </Link>
           </div>
         </CardFooter>
@@ -86,18 +86,18 @@ export default function RedefinirSenha() {
   return (
     <AuthLayout>
       <CardHeader className="flex flex-col items-center space-y-0 text-center">
-        <div className="pt-6 space-y-2">
-          <h2 className="text-xl font-bold text-[#062A45] -mb-1">
+        <div className="space-y-2 pt-4">
+          <h2 className="-mb-1 font-display text-xl font-bold text-foreground">
             Redefinir sua Senha
           </h2>
-          <p className="text-slate-600 text-sm leading-relaxed px-4">
+          <p className="px-4 text-sm leading-relaxed text-muted-foreground">
             Escolha uma nova senha para acessar sua conta.
           </p>
         </div>
       </CardHeader>
 
       <CardContent>
-        <form onSubmit={handleResetPassword} className="space-y-6 text-left">
+        <form onSubmit={handleResetPassword} className="space-y-5 text-left">
           <PasswordInput
             id="password"
             label="Nova Senha"
@@ -114,37 +114,39 @@ export default function RedefinirSenha() {
             errorMessage="As senhas não coincidem"
           />
 
-          <div className="bg-[#F8FAFC] border border-slate-100 rounded-lg p-4 space-y-0">
-            <p className="text-[10px] font-bold text-slate-500 tracking-wider uppercase">
+          <div className="space-y-1.5 rounded-xl border bg-muted/40 p-4">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
               A senha deve conter:
             </p>
 
-            <div className="flex items-center gap-1 text-sm mt-1">
+            <div className="mt-1 flex items-center gap-2 text-sm">
               {hasMinLength ? (
-                <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0" />
+                <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
               ) : (
-                <Circle className="h-4 w-4 text-slate-300 shrink-0" />
+                <Circle className="h-4 w-4 shrink-0 text-muted-foreground/50" />
               )}
               <span
                 className={
-                  hasMinLength ? "text-green-700 font-medium" : "text-slate-600"
+                  hasMinLength
+                    ? "font-medium text-success"
+                    : "text-muted-foreground"
                 }
               >
                 Mínimo de 8 caracteres
               </span>
             </div>
 
-            <div className="flex items-center gap-1 text-sm">
+            <div className="flex items-center gap-2 text-sm">
               {hasLetterAndNumber ? (
-                <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0" />
+                <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
               ) : (
-                <Circle className="h-4 w-4 text-slate-300 shrink-0" />
+                <Circle className="h-4 w-4 shrink-0 text-muted-foreground/50" />
               )}
               <span
                 className={
                   hasLetterAndNumber
-                    ? "text-green-700 font-medium"
-                    : "text-slate-600"
+                    ? "font-medium text-success"
+                    : "text-muted-foreground"
                 }
               >
                 Combinação de letras e números
@@ -161,10 +163,10 @@ export default function RedefinirSenha() {
         </form>
       </CardContent>
       <CardFooter className="flex justify-center pt-1">
-        <div className="w-full border-t border-slate-100 pt-5 flex justify-center">
+        <div className="flex w-full justify-center border-t pt-5">
           <Link
             to="/login"
-            className="flex items-center text-sm text-[#e31e24] hover:text-[#c1191f] hover:underline font-medium gap-2 transition-colors"
+            className="flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:underline"
           >
             <ArrowLeft className="h-4 w-4" /> Voltar para o login
           </Link>
