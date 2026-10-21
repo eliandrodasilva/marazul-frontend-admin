@@ -244,7 +244,7 @@ export default function Clientes() {
     <div>
       <PageHeader
         title="Clientes"
-        subtitle="Contratantes e empresas atendidas."
+        
         action={
           <PrimaryLink onClick={() => navigate("/clientes/cadastro")}>
             Novo cliente

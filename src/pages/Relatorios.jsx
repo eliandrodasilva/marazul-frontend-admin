@@ -4,7 +4,7 @@ import { Empty, ListCard, PageHeader } from "../components/admin";
 export default function Relatorios() {
   return (
     <>
-      <PageHeader title="Relatórios" subtitle="Indicadores da operação." />
+      <PageHeader title="Relatórios" />
       <ListCard title="Relatórios" count={0}>
         <Empty
           icon={BarChart3}

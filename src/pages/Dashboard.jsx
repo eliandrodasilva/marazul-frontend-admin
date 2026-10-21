@@ -77,7 +77,7 @@ export default function Dashboard() {
             <span>{firstName ? `Olá, ${firstName}` : "Olá!"}</span>
           )
         }
-        subtitle="Resumo da operação da Marazul em tempo real."
+        
       />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

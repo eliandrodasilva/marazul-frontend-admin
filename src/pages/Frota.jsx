@@ -277,7 +277,7 @@ export default function Frota() {
     <div>
       <PageHeader
         title="Frota"
-        subtitle="Gerencie os veículos da operação."
+        
         action={
           <PrimaryLink onClick={() => navigate("/frota/cadastro")}>
             Novo veículo

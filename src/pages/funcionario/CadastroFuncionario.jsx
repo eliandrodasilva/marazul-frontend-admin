@@ -184,7 +184,7 @@ const CadastroFuncionario = ({ isEdicao = false }) => {
     <div>
       <PageHeader
         title={isEdicao ? "Edição de colaborador" : "Cadastro de colaborador"}
-        subtitle="Adicione uma pessoa à equipe."
+        
       />
 
       <AdminCard>

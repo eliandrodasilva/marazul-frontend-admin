@@ -4,7 +4,7 @@ import { Empty, ListCard, PageHeader } from "../components/admin";
 export default function Viagens() {
   return (
     <>
-      <PageHeader title="Viagens" subtitle="Programação de viagens." />
+      <PageHeader title="Viagens" />
       <ListCard title="Viagens" count={0}>
         <Empty
           icon={Map}

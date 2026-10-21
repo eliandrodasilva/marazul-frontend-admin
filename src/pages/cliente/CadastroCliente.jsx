@@ -281,7 +281,7 @@ export default function CadastroCliente({ isEdicao = false }) {
     <div>
       <PageHeader
         title={isEdicao ? "Editar cliente" : "Cadastro de cliente"}
-        subtitle="Dados do contratante e endereço."
+        
       />
 
       <AdminCard>

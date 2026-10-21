@@ -204,7 +204,7 @@ const CadastroPerfil = ({ isEdicao = false }) => {
     <div className="space-y-6">
       <PageHeader
         title={isEdicao ? "Editar perfil" : "Cadastro de perfil"}
-        subtitle="Defina o nome e as permissões de acesso do perfil."
+        
       />
 
       <AdminCard>
@@ -314,7 +314,7 @@ const CadastroPerfil = ({ isEdicao = false }) => {
                           key={modulo}
                           className="rounded-xl border border-border bg-background/50 p-4"
                         >
-                          <legend className="px-1.5 text-sm font-semibold text-foreground">
+                          <legend className="px-1.5 text-base font-semibold text-foreground">
                             {ROTULOS_MODULO[modulo] ?? modulo}
                           </legend>
                           <div className="grid grid-cols-1 gap-x-6 gap-y-3 pb-3 sm:grid-cols-2">
@@ -336,7 +336,7 @@ const CadastroPerfil = ({ isEdicao = false }) => {
                                 />
                                 <Label
                                   htmlFor={`permissao-${permissao.id}`}
-                                  className="cursor-pointer text-sm font-normal text-foreground"
+                                  className="cursor-pointer text-base font-normal text-foreground"
                                 >
                                   {ROTULOS_FUNCIONALIDADE[
                                     permissao.funcionalidade
@@ -366,7 +366,7 @@ const CadastroPerfil = ({ isEdicao = false }) => {
                             />
                             <Label
                               htmlFor={`modulo-${modulo}`}
-                              className="cursor-pointer text-xs font-medium text-muted-foreground"
+                              className="cursor-pointer text-sm font-medium text-muted-foreground"
                             >
                               Selecionar todas
                             </Label>

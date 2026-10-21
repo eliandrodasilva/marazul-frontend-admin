@@ -122,7 +122,7 @@ export default function Passageiros() {
     <div className="space-y-6">
       <PageHeader
         title="Passageiros"
-        subtitle="Pessoas transportadas nas viagens."
+        
         action={<PrimaryLink onClick={() => navigate("/passageiros/cadastro")}>Novo passageiro</PrimaryLink>}
       />
 

@@ -201,7 +201,7 @@ export default function CadastroFrota() {
     <div>
       <PageHeader
         title={isEditing ? "Edição de veículo" : "Cadastro de veículo"}
-        subtitle="Preencha as informações do novo ônibus."
+        
       />
 
       <AdminCard>

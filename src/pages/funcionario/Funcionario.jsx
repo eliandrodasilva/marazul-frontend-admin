@@ -294,7 +294,7 @@ export default function Funcionarios() {
     <div>
       <PageHeader
         title="Colaboradores"
-        subtitle="Equipe, funções e acessos."
+        
         action={
           <PrimaryLink onClick={() => navigate("/funcionario/cadastro")}>
             Novo colaborador

@@ -43,7 +43,7 @@ export default function Sidebar({ onNavigate }) {
         </div>
       </div>
 
-      <nav className="mt-6 flex flex-col gap-1 overflow-y-auto">
+      <nav className="mt-6 flex flex-col gap-1.5 overflow-y-auto">
         {navItems.map(({ to, label, icon: Icon }) => (
           <NavLink
             key={to}
@@ -51,24 +51,19 @@ export default function Sidebar({ onNavigate }) {
             onClick={onNavigate}
             className={({ isActive }) =>
               cn(
-                "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-base font-medium transition-colors",
                 isActive
                   ? "bg-sidebar-accent text-sidebar-foreground font-semibold [&_svg]:text-accent"
                   : "text-sidebar-muted hover:bg-sidebar-accent hover:text-sidebar-foreground",
               )
             }
           >
-            <Icon className="h-4.5 w-4.5 shrink-0" />
+            <Icon className="h-5 w-5 shrink-0" />
             <span>{label}</span>
           </NavLink>
         ))}
         <Rightbar onNavigate={onNavigate} />
       </nav>
-
-      <div className="mt-auto rounded-xl border bg-background p-3 text-xs text-sidebar-muted">
-        Operação online{" "}
-        <span className="ml-1 inline-block h-2 w-2 rounded-full bg-success" />
-      </div>
     </div>
   );
 }

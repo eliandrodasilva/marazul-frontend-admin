@@ -203,7 +203,7 @@ export default function Perfis() {
     <div className="space-y-6">
       <PageHeader
         title="Perfis de acesso"
-        subtitle="Controle o que cada perfil pode fazer."
+        
         action={<PrimaryLink onClick={() => navigate("/perfis/cadastro")}>Novo perfil</PrimaryLink>}
       />
 
